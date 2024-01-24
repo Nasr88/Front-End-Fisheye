@@ -1,10 +1,16 @@
 @import url("photographer.css");
-
+:root {
+    --color-primary: #901C1C;
+    --color-dark-medium: #757575;
+}
 body {
     font-family: "DM Sans", sans-serif;
     margin: 0;
 }
-
+p{
+    margin-block-start: 3px;
+    margin-block-end: 3px;
+}
 
 header {
     display: flex;
@@ -18,25 +24,54 @@ h1 {
     color: #901C1C;
     margin-right: 100px;
 }
+h2{
+    margin:0;
+}
+#main{
+    margin: 0 auto;
+    /* padding: 30px 20px 20px; */
+    padding-bottom: 100px;
+    max-width: 1440px;
+}
+
+button, a {
+    cursor: pointer;
+    outline: none;
+    border: none;
+    text-decoration: none;
+}
 
 .logo {
     height: 50px;
     margin-left: 100px;
 }
-
-.photographer_section {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 70px;
-    margin-top: 100px;
+img, video {
+    object-fit: cover;
+    object-position: center;
 }
 
-.photographer_section article {
-    justify-self: center;
+.photographer_section {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 50px;
+    margin-top: 50px;
+}
+
+.photographer_section article {
+    display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 30%;
+}
+.photographer_section article a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5px;
+    border-radius: 5px;
 }
 
 .photographer_section article h2 {
@@ -45,6 +80,25 @@ h1 {
 }
 
 .photographer_section article img {
-    height: 200px;
-    width: 200px;
+    height: clamp(10rem, 15vw, 12.5rem);
+    width: clamp(10rem, 15vw, 12.5rem);
+}
+.photographer_profile_picture{
+    border-radius: 50%;
+}
+.photographer_name{
+    margin-top: 20px;
+    font-size: clamp(2rem, 1.5vw, 2.25rem);
+    text-align: center;
+}
+.photographer_cityCountry {
+    color: var(--color-primary);
+    font-size: clamp(20px, 15px, 25px);
+}
+.photographer_tagline{
+    font-size: clamp(15px, 10px, 20px);
+}
+.photographer_price{
+    color: var(--color-dark-medium);
+    font-size:clamp(15px, 10px, 20px);
 }
