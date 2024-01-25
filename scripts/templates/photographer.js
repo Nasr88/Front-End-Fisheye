@@ -5,37 +5,6 @@ function photographerTemplate(_photographer) {
   const url_photographer = `photographer.html?id=${id}`;
 
   function getUserCardDOM() {
-    //     const article = document.createElement("article");
-    //     const img = document.createElement("img");
-    //     const p_cityCountry = document.createElement("p");
-    //     const p_tagline = document.createElement("p");
-    //     const s_price = document.createElement("span");
-    //     const link = document.createElement("a");
-    //     img.setAttribute("src", picture);
-    //     img.classList.add("photographer_profile_picture");
-    //     p_cityCountry.classList.add("photographer_cityCountry");
-    //     p_tagline.classList.add("photographer_tagline");
-    //     s_price.classList.add("photographer_price");
-    //     const h2 = document.createElement("h2");
-    //     h2.textContent = name;
-    //     h2.classList.add("photographer_name");
-    //     link.append(img, h2); //ajouter img et h2 au lien
-    //     let text = document.createTextNode(`${city}, ${country}`);
-    //     p_cityCountry.appendChild(text);
-    //     text = document.createTextNode(`${tagline}`);
-    //     p_tagline.appendChild(text);
-    //     s_price.textContent = `${price}€/jour`;
-
-    //     //article.appendChild(img);
-    //     //article.appendChild(h2);
-    //     article.appendChild(link);
-    //     article.appendChild(p_cityCountry);
-    //     article.appendChild(p_tagline);
-    //     article.appendChild(s_price);
-
-    //     return article;
-    //   }
-
     const article = document.createElement("article");
     const photographerCard = `
             <a href="${url_photographer}" class="photographer-link" role="link" aria-label="Voir le profil de ${name}">
@@ -51,3 +20,27 @@ function photographerTemplate(_photographer) {
   }
   return { name, picture, getUserCardDOM };
 }
+
+function createPhotographerHeader(_photog) {
+  const { name, portrait, city, country, tagline} = _photog;
+  
+      const profilePageHeader = document.querySelector(".main_about");
+      // const formName = document.querySelector(".modal_photographer_name");
+      // formName.textContent = this.photographer.name;
+      //const metaDescription = document.querySelector('meta[name="description"]');
+      // if (metaDescription) {
+      //     metaDescription.content = `Découvrez ${this.photographer.name}, photographe professionnel basé à ${this.photographer.city}, ${this.photographer.country} offrant ses services à partir de ${this.photographer.price} € / jour.`;
+      // };
+      const about = `
+          <div class="photographer_profile__infos">
+              <h1 class="photographer_name">${name}</h1>
+              <p class="photographer_location">${city}, ${country}</p>
+              <p class="photographer_tagline">${tagline}</p>    
+          </div>
+          <button class="contact_button" type="button" aria-label="Contact Me"  onclick="displayModal()" >Contactez-moi</button>
+          <img class="photographer_photo" src="assets/photographers/photos/${portrait}" alt="${name}">
+      `;
+      profilePageHeader.innerHTML = about;
+      return profilePageHeader;
+    };
+  
