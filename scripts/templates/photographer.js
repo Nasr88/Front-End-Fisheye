@@ -1,46 +1,67 @@
-function photographerTemplate(_photographer) {
-  const { name, portrait, city, country, tagline, price, id } = _photographer;
 
-  const picture = `assets/photographers/Photos/${portrait}`;
-  const url_photographer = `photographer.html?id=${id}`;
-
-  function getUserCardDOM() {
-    const article = document.createElement("article");
-    const photographerCard = `
-            <a href="${url_photographer}" class="photographer-link" role="link" aria-label="Voir le profil de ${name}">
-                <img class="photographer_profile_picture" src="${picture}" alt="${name}">
-                <h2 class="photographer_name">${name}</h2>
-            </a>
-            <p class="photographer_cityCountry">${city}, ${country}</p>
-            <p class="photographer_tagline">${tagline}</p>
-            <span class="photographer_price">${price}€/jour</span>
-        `;
-    article.innerHTML = photographerCard;
-    return article;
-  }
-  return { name, picture, getUserCardDOM };
-}
-
+//pour les informations en haut de la page photographer
 function createPhotographerHeader(_photog) {
   const { name, portrait, city, country, tagline} = _photog;
   
-      const profilePageHeader = document.querySelector(".main_about");
-      // const formName = document.querySelector(".modal_photographer_name");
-      // formName.textContent = this.photographer.name;
-      //const metaDescription = document.querySelector('meta[name="description"]');
-      // if (metaDescription) {
-      //     metaDescription.content = `Découvrez ${this.photographer.name}, photographe professionnel basé à ${this.photographer.city}, ${this.photographer.country} offrant ses services à partir de ${this.photographer.price} € / jour.`;
-      // };
+      const article = document.createElement("aticle");
+      article.classList.add("main_about")
       const about = `
           <div class="photographer_profile__infos">
-              <h1 class="photographer_name">${name}</h1>
-              <p class="photographer_location">${city}, ${country}</p>
-              <p class="photographer_tagline">${tagline}</p>    
+              <h1 class="photographer_header_name">${name}</h1>
+              <p class="photographer_header_location">${city}, ${country}</p>
+              <p class="photographer_header_tagline">${tagline}</p>    
           </div>
-          <button class="contact_button" type="button" aria-label="Contact Me"  onclick="displayModal()" >Contactez-moi</button>
-          <img class="photographer_photo" src="assets/photographers/photos/${portrait}" alt="${name}">
-      `;
-      profilePageHeader.innerHTML = about;
-      return profilePageHeader;
+          <button class="contact_button" type="button" aria-label="Contact Me" onclick="displayModal()" >Contactez-moi</button>
+          <img class="photographer_header_photo" src="assets/photographers/photos/${portrait}" alt="${name}">
+      `; 
+      article.innerHTML = about;
+      return article;
     };
+  
+ 
+  //pour afficher les medias
+    function displayPhotographerMedia (_photographer, _media){
+      const { name, price} = _photographer;
+      
+      
+      const profilePageContent = document.querySelector(".main_content_medias");
+        const content = `
+            <section class="gallery">
+                ${_media.map(media => {
+            const mediaContent = media.image
+                ? ` <img class="gallery_thumbnail" src="../../assets/medias/${name}/${media.image}" alt="${media.alt}">`
+                : ` <video class="gallery_thumbnail" aria-label="${media.alt}">
+                        <source src="../../assets/medias/${name}/${media.video}" type="video/mp4">
+                    </video>`;
+            return `
+                    <article class="gallery_card">                           
+                        <a href="#" data-media=${media.id} role="link" aria-label="View media large">
+                            <figure>${mediaContent}</figure>
+                        </a>
+                        <figcaption>
+                            <h2>${media.title}</h2>
+                                <div role="group" aria-label="Like button and number of likes">
+                                    <span class="nbLike">${media.likes}</span> 
+                                    <button class="btn_like" type="button" aria-label="Like"  data-id="${media.id}">
+                                        <span class="fas fa-heart" aria-hidden="true"></span>
+                                    </button> 
+                                </div>
+                        </figcaption>
+                    </article>
+                `;
+        }).join("")}
+            </section >
+            <aside>
+                <p class="photographer_Likes">
+                    <span class="photographer_likes_count"></span>
+                    <span class="fas fa-heart" aria-hidden="true"></span>
+                </p>
+                <span>${price}€ / jour</span>
+            </aside>
+        `;
+
+        profilePageContent.innerHTML = content;
+        return content;
+    };
+    
   
