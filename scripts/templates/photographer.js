@@ -29,8 +29,8 @@ function createPhotographerHeader(_photog) {
             <section class="gallery">
                 ${_media.map(media => {
             const mediaContent = media.image
-                ? ` <img class="gallery_thumbnail" src="../../assets/medias/${name}/${media.image}" alt="${media.alt}">`
-                : ` <video class="gallery_thumbnail" aria-label="${media.alt}">
+                ? ` <img class="gallery_thumbnail" src="../../assets/medias/${name}/${media.image}" alt="${media.alt}" onclick=" openLightbox('${name}','${media.image}', '${media.alt}')">`
+                : ` <video class="gallery_thumbnail" aria-label="${media.alt}"  onclick=" openLightbox('${name}','${media.video}', '${media.alt}')">
                         <source src="../../assets/medias/${name}/${media.video}" type="video/mp4">
                     </video>`;
             return `
@@ -64,4 +64,16 @@ function createPhotographerHeader(_photog) {
         return content;
     };
     
-  
+ //pour afficher l lightbox
+//  function displayLightbox(_photog, _media){
+//   const {name} = _photog;
+//   const lightboxMedia = document.querySelector('.lightbox_media');
+//   // lightboxMedia.innerHTML = `
+//   //           ${_media.image ? `
+//   //           <img src="../../assets/medias/${name}/${_media.image}" alt="${_media.alt}">` : 
+//   //           `<video controls aria-label="${_media.alt}"><source src="../../assets/medias/${name}/${_media.video}" type="video/mp4"></video>`}
+
+//   //           <figcaption>${_media.title}</figcaption>
+//   //       `;
+//   //       return lightboxMedia;
+//  } 

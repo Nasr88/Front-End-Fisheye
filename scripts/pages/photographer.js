@@ -75,7 +75,23 @@ async function getPhotographerDetail() {
       btn.classList.toggle("liked");
     });
   });
+
+  //afficher lightbox
+  const lightboxWrapper = document.querySelector('.lightbox_wrapper');
+  const mediaLink =Array.from(document.querySelectorAll('.gallery_card a'));
+  let currentIndex = 0; 
+  const mediasList = data.media;
+  mediaLink.forEach(media => {
+  media.addEventListener('click', () => {
+ 
+             const mediaId = media.dataset.media;
+             const mediaIndex = mediasList.findIndex(media => media.id == mediaId);
+             currentIndex = mediaIndex;
+             lightboxWrapper.style.display = 'flex';
+ });
+});
 }
+
 
 function getPhotographerIdFromHref() {
   // Analyse l'ID du photographe à partir de l'URL
