@@ -7,9 +7,9 @@ export async function getPhotographerDetail(_selectedValue = "") {
   // Récupère l'ID du photographe à partir de l'attribut href
   const photographerId = getPhotographerIdFromHref();
   document.getElementById("id").value = photographerId;
-  
+
   let photographers;
-  let response = await fetch("../../data/photographers.json");
+  let response = await fetch("data/photographers.json");
   let data = await response.json();
   photographers = data.photographers;
 
