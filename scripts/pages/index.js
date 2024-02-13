@@ -5,7 +5,7 @@ async function getPhotographers() {
   photographers = data.photographers;
 
   console.log(photographers);
-  // et bien retourner le tableau photographers seulement une fois récupéré
+  
   return { photographers };
 }
 
