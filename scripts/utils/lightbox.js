@@ -29,8 +29,8 @@ const displayLightbox = (medias,photographer) => {
         
         lightboxMedia.innerHTML = `
             ${currentMedia.image ? `
-            <img src="../../assets/medias/${photographer.name}/${currentMedia.image}" alt="${currentMedia.alt}">` : 
-            `<video controls aria-label="${currentMedia.alt}"><source src="../../assets/medias/${photographer.name}/${currentMedia.video}" type="video/mp4"></video>`}
+            <img src="assets/medias/${photographer.name}/${currentMedia.image}" alt="${currentMedia.alt}">` : 
+            `<video controls aria-label="${currentMedia.alt}"><source src="assets/medias/${photographer.name}/${currentMedia.video}" type="video/mp4"></video>`}
 
             <figcaption>${currentMedia.title}</figcaption>
         `;

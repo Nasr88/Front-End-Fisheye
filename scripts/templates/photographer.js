@@ -29,9 +29,9 @@ function createPhotographerHeader(_photog) {
             <section class="gallery">
                 ${_media.map(media => {
             const mediaContent = media.image
-                ? ` <img class="gallery_thumbnail" src="../../assets/medias/${name}/${media.image}" alt="${media.alt}">`
+                ? ` <img class="gallery_thumbnail" src="assets/medias/${name}/${media.image}" alt="${media.alt}">`
                 : ` <video class="gallery_thumbnail" aria-label="${media.alt}">
-                        <source src="../../assets/medias/${name}/${media.video}" type="video/mp4">
+                        <source src="assets/medias/${name}/${media.video}" type="video/mp4">
                     </video>`;
             return `
                     <article class="gallery_card">                           
