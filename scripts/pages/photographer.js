@@ -1,14 +1,13 @@
 import mediasFactory from "../factories/mediasFactory.js";
 
 //Mettre le code JavaScript lié à la page photographer.html
-const photographerModalName = document.querySelector(
-  ".modal_photographer_name"
-);
+const photographerModalName = document.querySelector(".modal_photographer_name");
 
-async function getPhotographerDetail() {
+export async function getPhotographerDetail(_selectedValue = "") {
   // Récupère l'ID du photographe à partir de l'attribut href
   const photographerId = getPhotographerIdFromHref();
-
+  document.getElementById("id").value = photographerId;
+  
   let photographers;
   let response = await fetch("../../data/photographers.json");
   let data = await response.json();
@@ -22,35 +21,45 @@ async function getPhotographerDetail() {
   const photographerInfoSection = document.getElementById("section_about");
 
   const photogInfoModel = createPhotographerHeader(clickedPhotographer[0]);
+  photographerInfoSection.innerHTML ='';
   photographerInfoSection.appendChild(photogInfoModel);
-
-  // console.log(clickedPhotographer);
-  // console.log(clickedPhotographer[0].name);
 
   // recuperer les medias de json
   const medias = data.media;
-  const photgrapherMedias = medias
-    .filter((media) => media.photographerId === +photographerId)
+  const photgrapherMedias = medias.filter((media) => media.photographerId === +photographerId)
     .map((_media) => new mediasFactory(_media));
+
+  if (_selectedValue != "") {
+    switch (_selectedValue) {
+      case "Titre":
+        photgrapherMedias.sort((a, b) => a.title.localeCompare(b.title));
+        break;
+      case "Popularité":
+        photgrapherMedias.sort((a, b) => b.likes - a.likes);
+        break;
+      case "Date":
+        photgrapherMedias.sort(
+          (a,b) => new Date(b.date) - new Date(a.date)
+        );
+        break;
+    }
+  }
   displayPhotographerMedia(clickedPhotographer[0], photgrapherMedias);
+
   //console.log(photgrapherMedias);
 
   //display total likes
   const med = data.media;
-  const calculateLikesById = (_medias, targetId) => {
+  const calculateLikesById = (photgrapherMedias) => {
     let totalLikes = 0;
 
-    _medias.forEach((media) => {
-      const { photographerId, likes } = media;
-
-      if (photographerId === targetId) {
-        totalLikes += likes;
-      }
+    photgrapherMedias.forEach((media) => {
+      totalLikes += media.likes
     });
 
     return totalLikes;
   };
-  let sumTotoalLikes = calculateLikesById(med, clickedPhotographer[0].id);
+  let sumTotoalLikes = calculateLikesById(photgrapherMedias);
 
   //console.log(sumTotoalLikes);
   const likesSpan = document.querySelector(".photographer_likes_count");
@@ -61,8 +70,7 @@ async function getPhotographerDetail() {
   allBtnLike.forEach((btn) => {
     btn.addEventListener("click", () => {
       const likesElement = btn.previousElementSibling;
-      const medias = data.media;
-      const _media = medias.find((media) => media.id == btn.dataset.id);
+      const _media = photgrapherMedias.find((media) => media.id == btn.dataset.id);
       if (!btn.classList.contains("liked")) {
         _media.likes++;
         sumTotoalLikes++;
@@ -76,22 +84,9 @@ async function getPhotographerDetail() {
     });
   });
 
-  //afficher lightbox
-  const lightboxWrapper = document.querySelector('.lightbox_wrapper');
-  const mediaLink =Array.from(document.querySelectorAll('.gallery_card a'));
-  let currentIndex = 0; 
-  const mediasList = data.media;
-  mediaLink.forEach(media => {
-  media.addEventListener('click', () => {
- 
-             const mediaId = media.dataset.media;
-             const mediaIndex = mediasList.findIndex(media => media.id == mediaId);
-             currentIndex = mediaIndex;
-             lightboxWrapper.style.display = 'flex';
- });
-});
-}
+  displayLightbox(photgrapherMedias, clickedPhotographer[0]);
 
+}
 
 function getPhotographerIdFromHref() {
   // Analyse l'ID du photographe à partir de l'URL

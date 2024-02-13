@@ -1,3 +1,4 @@
+import {getPhotographerDetail} from '../pages/photographer.js'
 const openCloseFilterMenu = () => {
   const filterMenu = document.querySelector(".dropdown_content");
   const filterMenuButton = document.querySelector(".btn_drop");
@@ -39,10 +40,12 @@ const openCloseFilterMenu = () => {
         button.style.display = "none";
       else button.style.display = "block";
       openCloseDropdown();
+      getPhotographerDetail(button.getAttribute("data-btn-title"));
     });
   });
 
   filterMenuButton.addEventListener("click", openCloseDropdown);
 };
+
 
 openCloseFilterMenu();

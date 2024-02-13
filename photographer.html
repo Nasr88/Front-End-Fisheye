@@ -32,7 +32,6 @@
                         <span id="current_filter">Titre</span>
                         <span class="fa-solid fa-chevron-up" aria-hidden="true"></span>
                     </button>
-
                     <ul class="dropdown_content" aria-hidden="true">
                         <li role="option">
                             <button data-btn-title="Titre" type="button" tabindex="-1" aria-label="Sort by title">Titre</button>
@@ -54,38 +53,41 @@
       <div id="contact_modal" aria-modal="true" role="dialog">
             <div class="modal" aria-describedby="formTitle">
               <div class="modal_form_title">
-                <h2 id="formTitle">Contactez-moi  <img src="assets/icons/close.svg" class="btn_close" alt="close" onclick="closeModal()"  tabindex="1"/></h2>
+                <h2 id="formTitle">Contactez-moi  
+                  <img src="assets/icons/close.svg" class="btn_close" alt="close" onclick="closeModal()"  tabindex="1"/>
+                </h2>
                 <p class="modal_photographer_name"></p>
             </div> 
-            <form novalidate>
+            <form id="ContactPhotgrapherForm" onsubmit="logData(event)" method="get">
                 <div class="form_content">
                     <label id="firstname-label" for="firstname">Prénom</label>
-                    <input class="formField" aria-labelledby="firstname-label" type="text" id="firstname" name="firstname"/>
+                    <input class="formField"  tabindex="1" aria-labelledby="firstname-label" type="text" id="firstname" name="firstname" minlength="2"  required/>
                     
                 </div>
                 <div class="form_content"> 
                     <label id="lastname-label" for="lastname">Nom</label>
-                    <input class="formField" aria-labelledby="lastname-label" type="text" id="lastname" name="lastname"/>
+                    <input class="formField"  tabindex="2" aria-labelledby="lastname-label" type="text" id="lastname" name="lastname" minlength="2"  required/>
                     
                 </div>
                 <div class="form_content">
                     <label id="email-label" for="email">Email</label>
-                    <input class="formField" aria-labelledby="email-label" type="email" id="email" name="email" />
+                    <input class="formField"  tabindex="3" aria-labelledby="email-label" type="email" id="email" name="email" pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$" required/>
                    
                 </div>
                 <div class="form_content">
                     <label id="message-label" for="message">Votre message</label>
-                    <textarea class="formField" aria-labelledby="message-label" id="message" name="message"></textarea>
+                    <textarea class="formField"  tabindex="4" aria-labelledby="message-label" id="message" name="message" minlength="10" required></textarea>
                     
                 </div>
-                <button class="btn_submit" type="submit" aria-label="Send">Envoyer</button>
+                <input type="hidden" id="id" name="id" />
+                <button class="btn_submit"  tabindex="5" type="submit" aria-label="Send">Envoyer</button>
             </form>
         </div>
     </div>
     <!-- Lightbox -->
     <div class="lightbox_wrapper wrapper" aria-modal="true" role="dialog">
       <div class="lightbox" aria-label="Media closeup view">
-          <img src="assets/icons/closeLightbox.svg" class="btn_close_lightbox btn_close" aria-label="Close dialog" alt="close" onclick="closeLightbox()"></img>
+          <img src="assets/icons/closeLightbox.svg" class="btn_close_lightbox btn_close" tabindex="-1" aria-label="Close dialog" alt="close" onclick="closeLightbox()"></img>
           <button class="btn_next" aria-label="Next media"></button>
           <button class="btn_previous" aria-label="Previous media"></button>
           <figure class="lightbox_media" role="media" aria-label="Current Media"></figure>
@@ -96,7 +98,7 @@
     <script type="module" src="/scripts/pages/photographer.js"></script>
     <script src="/scripts/utils/contactForm.js"></script>
     <script src="/scripts/templates/photographer.js"></script>
-    <script src="scripts/utils/filter.js"></script>
+    <script  type="module" src="scripts/utils/filter.js"></script>
     <script src="scripts/utils/lightbox.js"></script>
   </body>
 </html>
