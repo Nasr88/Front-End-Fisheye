@@ -12,7 +12,7 @@ function createPhotographerHeader(_photog) {
               <p class="photographer_header_tagline">${tagline}</p>    
           </div>
           <button class="contact_button" type="button" aria-label="Contact Me" onclick="displayModal()" >Contactez-moi</button>
-          <img class="photographer_header_photo" src="assets/photographers/photos/${portrait}" alt="${name}">
+          <img class="photographer_header_photo" src="blob/master/assets/photographers/photos/${portrait}" alt="${name}">
       `; 
       article.innerHTML = about;
       return article;
