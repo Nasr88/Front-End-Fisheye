@@ -221,7 +221,8 @@ form input {
     background-color: var(--color-primary);
 }
 .btn_drop, .dropdown_content li button {
-    height: 50px;
+    width: 10.625rem;
+    height: 4rem;
     padding: 15px;
     font-size: 18px;
     color: var(--color-light);
@@ -236,7 +237,17 @@ form input {
 }
 .dropdown_content li {
     position: relative;
-    width: 150px;
+    width: 10.625rem;
+}
+
+.dropdown_content li:not(:first-child):before {
+    background-color: #fff;
+    content: "";
+    height: 1px;
+    position: absolute;
+    top: 0;
+    width: calc(100% - 2rem);
+    right:15px;
 }
 .dropdown_content li button {
     width: 100%;
@@ -245,6 +256,7 @@ form input {
 .curtain_effect {
     max-height: 200px;
 }
+
 .rotate{
     transform: rotate(180deg);
 }

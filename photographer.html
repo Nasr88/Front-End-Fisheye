@@ -28,19 +28,19 @@
             <h2 class="filter_title">Trier par</h2>
             <div class="filter_section" >
                 <div class="dropdown">
-                    <button class="btn_drop" type="button" role="button" aria-haspopup="listbox" aria-expanded="false" aria-controls="filter options" aria-label="Sort by">
-                        <span id="current_filter">Titre</span>
+                    <button class="btn_drop" type="button" role="button" aria-haspopup="listbox" aria-expanded="false" aria-controls="sort-dropdown" aria-label="Order by">
+                        <span id="current_filter">Popularité</span>
                         <span class="fa-solid fa-chevron-up" aria-hidden="true"></span>
                     </button>
-                    <ul class="dropdown_content" aria-hidden="true">
+                    <ul id="sort-dropdown" role="listbox" class="dropdown_content" aria-hidden="true">
                         <li role="option">
-                            <button data-btn-title="Titre" type="button" tabindex="-1" aria-label="Sort by title">Titre</button>
+                            <button data-btn-title="Popularité" type="button" tabindex="-1" aria-label="Order by Popularity">Popularité</button>
                         </li>
                         <li role="option">
-                            <button data-btn-title="Popularité" type="button" tabindex="-1" aria-label="Sort by popularity">Popularité</button>
+                            <button data-btn-title="Date" type="button" tabindex="-1" aria-label="Order by Date">Date</button>
                         </li>   
                         <li role="option">
-                            <button data-btn-title="Date" type="button" tabindex="-1" aria-label="Sort by date">Date</button>
+                            <button data-btn-title="Titre" type="button" tabindex="-1" aria-label="Order by Title">Titre</button>
                         </li>
                     </ul>
                 </div>
@@ -79,7 +79,7 @@
                     <textarea class="formField"  tabindex="4" aria-labelledby="message-label" id="message" name="message" minlength="10" required></textarea>
                     
                 </div>
-                <input type="hidden" id="id" name="id" />
+                <!-- <input type="hidden" id="id" name="id" /> -->
                 <button class="btn_submit"  tabindex="5" type="submit" aria-label="Send">Envoyer</button>
             </form>
         </div>

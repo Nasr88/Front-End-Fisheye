@@ -1,51 +1,57 @@
-import {getPhotographerDetail} from '../pages/photographer.js'
-const openCloseFilterMenu = () => {
+import { getPhotographerDetail } from "../pages/photographer.js";
+
+// Fonction pour ouvrir ou fermer le menu déroulant
+const toggleDropdownMenu = () => {
   const filterMenu = document.querySelector(".dropdown_content");
   const filterMenuButton = document.querySelector(".btn_drop");
   const filterButtons = document.querySelectorAll(".dropdown_content button");
 
-  const openCloseDropdown = () => {
-    const selectedValue = document.getElementById("current_filter").innerHTML;
-    const isExpanded =
-      filterMenuButton.getAttribute("aria-expanded") === "true" || false;
-    filterMenuButton.setAttribute("aria-expanded", !isExpanded);
-    filterMenu.classList.toggle("curtain_effect");
-    document.querySelector(".fa-chevron-up").classList.toggle("rotate");
+  // Récupérer la valeur actuellement sélectionnée dans le menu déroulant
+  const selectedValue = document.getElementById("current_filter").innerHTML;
 
-    const newAriaHiddenValue = filterMenu.classList.contains("curtain_effect")
-      ? "false"
-      : "true";
-    filterMenu.setAttribute("aria-hidden", newAriaHiddenValue);
+  // Déterminer si le menu est ouvert ou fermé:  Si cet attribut est égal à "true", la variable isExpanded sera true. Sinon, elle sera false.
+  const isExpanded = filterMenuButton.getAttribute("aria-expanded") === "true" || false;
 
-    const newTabIndexValue = filterMenu.classList.contains("curtain_effect")
-      ? "0"
-      : "-1";
-    filterButtons.forEach((button) => {
-      button.setAttribute("tabindex", newTabIndexValue);
-      if (button.getAttribute("data-btn-title") === selectedValue)
-        button.style.display = "none";
-      else button.style.display = "block";
-    });
-  };
-  const onSelectOption = () => {};
+  // Inverser l'état du menu déroulant
+  filterMenuButton.setAttribute("aria-expanded", !isExpanded);
+  filterMenu.classList.toggle("curtain_effect");
+  document.querySelector(".fa-chevron-up").classList.toggle("rotate");
+
+  // Définir l'attribut aria-hidden en fonction de l'état du menu déroulant
+  const newAriaHiddenValue = filterMenu.classList.contains("curtain_effect") ? "false" : "true";
+  filterMenu.setAttribute("aria-hidden", newAriaHiddenValue);
+
+  // Définir le tabindex des boutons en fonction de l'état du menu déroulant
+  const newTabIndexValue = filterMenu.classList.contains("curtain_effect") ? "0" : "-1";
+  filterButtons.forEach((button) => {
+    button.setAttribute("tabindex", newTabIndexValue);
+    button.style.display = button.getAttribute("data-btn-title") === selectedValue ? "none" : "block";
+  });
+};
+
+// Fonction pour gérer l'ouverture et la fermeture du menu déroulant
+const openCloseFilterMenu = () => {
+  const filterMenuButton = document.querySelector(".btn_drop");
+  const filterButtons = document.querySelectorAll(".dropdown_content button");
 
   filterButtons.forEach((button) => {
-    const selectedValue = document.getElementById("current_filter").innerHTML;
-    button.removeEventListener("click", () => {});
+    // Au clic sur un bouton dans le menu déroulant
     button.addEventListener("click", () => {
-      document.getElementById("current_filter").textContent =
-        button.getAttribute("data-btn-title");
+      // Mettre à jour le texte du bouton d'ouverture du menu déroulant avec la valeur du bouton cliqué
+      document.getElementById("current_filter").textContent = button.getAttribute("data-btn-title");
 
-      if (button.getAttribute("data-btn-title") === selectedValue)
-        button.style.display = "none";
-      else button.style.display = "block";
-      openCloseDropdown();
+      // Appeler la fonction pour ouvrir ou fermer le menu déroulant
+      toggleDropdownMenu();
+
+      // Appeler la fonction pour récupérer les détails du photographe en fonction de la valeur sélectionnée
       getPhotographerDetail(button.getAttribute("data-btn-title"));
     });
   });
 
-  filterMenuButton.addEventListener("click", openCloseDropdown);
+  // Au clic sur le bouton d'ouverture du menu déroulant
+  filterMenuButton.addEventListener("click", toggleDropdownMenu);
 };
 
-
+// Appeler la fonction pour gérer l'ouverture et la fermeture du menu déroulant
 openCloseFilterMenu();
+
