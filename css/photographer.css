@@ -353,9 +353,9 @@ aside {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
-    max-width: 1000px;
-    height: 80%;
+    width: 80%;
+    max-width: 800px;
+    height: 95%;
     max-height: 1000px;
     background-color: var(--color-light);
     padding: 25px 60px 0;

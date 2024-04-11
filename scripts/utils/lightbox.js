@@ -6,21 +6,25 @@ const displayLightbox = (medias,photographer) => {
     const btnNext = document.querySelector('.btn_next');
     const lightboxMedia = document.querySelector('.lightbox_media');
     const mediaProvider = Array.from(document.querySelectorAll('.gallery_card a'));
+    const dialog= document.querySelector('.lightbox');
 
-    //const photographer = photographer;
     const mediasList = medias;
     let currentIndex = 0; 
-
+   
     mediaProvider.forEach(media => {
         media.addEventListener('click', () => {
             const mediaId = media.dataset.media;
             const mediaIndex = mediasList.findIndex(media => media.id == mediaId);
             currentIndex = mediaIndex;
-            lightboxWrapper.style.display = 'flex';
+            //media.setAttribute("aria-hidden", "true");
+             // Add the classes and attributes to make the modal visible
+             lightboxWrapper.style.display = 'flex';
+            dialog.setAttribute("aria-hidden", "false");
+            dialog.setAttribute("aria-modal", "true");
             btnClose.focus();
             lightboxTemplate();
              // Ajouter un écouteur d'événement pour la touche "Entrée"
-             btnClose.addEventListener("keydown", handleKeyDown);
+            btnClose.addEventListener("keydown", handleKeyDown);
         });
     });
         
@@ -29,16 +33,17 @@ const displayLightbox = (medias,photographer) => {
         
         lightboxMedia.innerHTML = `
             ${currentMedia.image ? `
-            <img src="assets/medias/${photographer.name}/${currentMedia.image}" alt="${currentMedia.alt}">` : 
-            `<video controls aria-label="${currentMedia.alt}"><source src="assets/medias/${photographer.name}/${currentMedia.video}" type="video/mp4"></video>`}
+            <img src="assets/medias/${photographer.name}/${currentMedia.image}" alt="${currentMedia.title}">` : 
+            `<video controls aria-label="${currentMedia.title}"><source src="assets/medias/${photographer.name}/${currentMedia.video}" type="video/mp4"></video>`}
 
             <figcaption>${currentMedia.title}</figcaption>
         `;
     };
     
     function closeLightbox() {
-        const lightbox = document.querySelector(".lightbox_wrapper");
-        lightbox.style.display = "none";
+        lightboxWrapper.style.display = "none";
+        lightboxWrapper.setAttribute("aria-hidden", "true");
+        lightboxWrapper.setAttribute("aria-modal", "false");
     }
 
     const nextMedia = () => {

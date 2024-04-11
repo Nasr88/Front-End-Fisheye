@@ -35,7 +35,7 @@ function createPhotographerHeader(_photog) {
                     </video>`;
             return `
                     <article class="gallery_card">                           
-                        <a href="#" data-media=${media.id} role="link" aria-label="View media large">
+                        <a aria-haspopup="true" href="#" data-media=${media.id} role="link" aria-label="Lilac breasted roller, closeup view">
                             <figure>${mediaContent}</figure>
                         </a>
                         <figcaption>
