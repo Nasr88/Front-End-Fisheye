@@ -6,28 +6,41 @@ const displayLightbox = (medias,photographer) => {
     const btnNext = document.querySelector('.btn_next');
     const lightboxMedia = document.querySelector('.lightbox_media');
     const mediaProvider = Array.from(document.querySelectorAll('.gallery_card a'));
-    const dialog= document.querySelector('.lightbox');
-
+    const main = document.getElementById('main');
+    
     const mediasList = medias;
     let currentIndex = 0; 
    
-    mediaProvider.forEach(media => {
-        media.addEventListener('click', () => {
+    const openMedia = (media)=>{
+        
             const mediaId = media.dataset.media;
             const mediaIndex = mediasList.findIndex(media => media.id == mediaId);
             currentIndex = mediaIndex;
-            //media.setAttribute("aria-hidden", "true");
-             // Add the classes and attributes to make the modal visible
-             lightboxWrapper.style.display = 'flex';
-            dialog.setAttribute("aria-hidden", "false");
-            dialog.setAttribute("aria-modal", "true");
+    
+            // Afficher la modal
+            lightboxWrapper.style.display = 'flex';
+            lightboxWrapper.setAttribute("aria-hidden", "false");
+            lightboxWrapper.setAttribute("aria-modal", "true");
+            
+    
+            // Définir le focus sur le bouton de fermeture
             btnClose.focus();
+    
+            // Appeler la fonction pour mettre à jour le contenu de la modal
             lightboxTemplate();
-             // Ajouter un écouteur d'événement pour la touche "Entrée"
+    
+            // Ajouter un écouteur d'événement pour la touche "Entrée" sur le bouton de fermeture
             btnClose.addEventListener("keydown", handleKeyDown);
-        });
-    });
         
+
+    }
+    mediaProvider.forEach(media => {
+    media.addEventListener('click',()=>{openMedia(media)} );
+    media.addEventListener('keyup',(e)=>{
+        if(e.key === "Enter")
+         openMedia(media)
+        });
+    }); 
     const lightboxTemplate = () => {
         const currentMedia = mediasList[currentIndex];
         
@@ -80,11 +93,12 @@ const displayLightbox = (medias,photographer) => {
 
 
     // Fonction pour gérer l'événement de touche enfoncée
-function handleKeyDown(event) {
+    function handleKeyDown(event) {
     if (event.key === "Enter") {
         closeLightbox();
     }
-}
+    }
+    
 
 };
 

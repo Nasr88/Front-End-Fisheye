@@ -363,7 +363,9 @@ aside {
     
    
 }
-.wrapper {
+
+
+.lightbox_wrapper {
     z-index: 10;
     display: none;
     justify-content: center;

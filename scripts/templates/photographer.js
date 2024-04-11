@@ -35,14 +35,14 @@ function createPhotographerHeader(_photog) {
                     </video>`;
             return `
                     <article class="gallery_card">                           
-                        <a aria-haspopup="true" href="#" data-media=${media.id} role="link" aria-label="Lilac breasted roller, closeup view">
+                        <a aria-haspopup="dialog" href="#" data-media=${media.id} role="link" aria-label="Lilac breasted roller, closeup view">
                             <figure>${mediaContent}</figure>
                         </a>
                         <figcaption>
                             <h2>${media.title}</h2>
                                 <div role="group" aria-label="Like button and number of likes">
                                     <span class="nbLike">${media.likes}</span> 
-                                    <button class="btn_like" type="button" aria-label="Like"  data-id="${media.id}">
+                                    <button class="btn_like" type="button" aria-label="Like" data-id="${media.id}">
                                         <span class="fas fa-heart" aria-hidden="true"></span>
                                     </button> 
                                 </div>

@@ -61,12 +61,12 @@
             <form id="ContactPhotgrapherForm" onsubmit="logData(event)" method="get">
                 <div class="form_content">
                     <label id="firstname-label" for="firstname">Prénom</label>
-                    <input class="formField"  tabindex="1" aria-labelledby="firstname-label" type="text" id="firstname" name="firstname" minlength="2"  required/>
+                    <input class="formField"  tabindex="1" aria-labelledby="firstname-label" type="text" id="firstname" pattern="[A-Za-zÀ-ÖØ-öø-ÿ\s\-']{2,50}"  name="firstname" minlength="2" title="Veuillez saisir un nom valide (2 à 50 caractères) contenant uniquement des lettres, des espaces, des tirets et des apostrophes."  required/>
                     
                 </div>
                 <div class="form_content"> 
                     <label id="lastname-label" for="lastname">Nom</label>
-                    <input class="formField"  tabindex="2" aria-labelledby="lastname-label" type="text" id="lastname" name="lastname" minlength="2"  required/>
+                    <input class="formField"  tabindex="2" aria-labelledby="lastname-label" type="text" id="lastname" pattern="[A-Za-zÀ-ÖØ-öø-ÿ\s\-']{2,50}"  name="lastname" minlength="2" title="Veuillez saisir un nom valide (2 à 50 caractères) contenant uniquement des lettres, des espaces, des tirets et des apostrophes." required/>
                     
                 </div>
                 <div class="form_content">
@@ -85,7 +85,7 @@
         </div>
     </div>
     <!-- Lightbox -->
-    <div class="lightbox_wrapper wrapper" aria-modal="true" aria-hidden="true" role="dialog" aria-labelledby="Lilac breasted roller, closeup view">
+    <div class="lightbox_wrapper"  aria-modal="true" aria-hidden="true" role="dialog" aria-label="Lilac breasted roller, closeup view">
       <div class="lightbox" aria-label="Media closeup view">
           <img src="assets/icons/closeLightbox.svg" class="btn_close_lightbox btn_close" tabindex="-1" aria-label="Close dialog" alt="close" onclick="closeLightbox()"></img>
           <button class="btn_next" aria-label="Next media"></button>
